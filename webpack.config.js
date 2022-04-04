@@ -31,9 +31,9 @@ const config = {
   },
   stats: 'errors-warnings',
   resolve: {
-    extensions: ['', '.js', '.vue'],
+    extensions: ['.vue', '.js', '.json', 'scss', 'css'],
     alias: {
-      '@src': './src/*',
+      '@': path.resolve(__dirname, 'src'),
     },
   },
   plugins: [
@@ -55,37 +55,52 @@ const config = {
   module: {
     rules: [
       {
-        test: /.vue$/,
-        loader: 'vue-loader',
-        exclude: '/node_modules/',
-      },
-      {
-        test: /\.(js|jsx)$/i,
-        loader: 'babel-loader',
-      },
-      {
-        test: /\.css$/i,
-        use: [stylesHandler, 'css-loader'],
-      },
-      {
-        test: /\.s[ac]ss$/i,
-        use: [
-          stylesHandler,
-          'css-loader',
+        oneOf: [
           {
-            loader: 'sass-loader',
-            options: {
-              implementation: require('sass'),
-              sassOptions: {
-                indentedSyntax: true, // optional
+            test: /.vue$/,
+            loader: 'vue-loader',
+            exclude: '/node_modules/',
+          },
+          {
+            test: /\.(js|jsx)$/i,
+            loader: 'babel-loader',
+          },
+          {
+            test: /\.css$/i,
+            use: [stylesHandler, 'css-loader'],
+          },
+          {
+            test: /\.s[ac]ss$/i,
+            use: [
+              stylesHandler,
+              {
+                loader: 'css-loader',
+                options: {
+                  importLoaders: 1,
+                },
+              },
+              {
+                loader: 'sass-loader',
+                options: {
+                  implementation: require('sass'),
+                  sassOptions: {
+                    indentedSyntax: true, // optional
+                  },
+                },
+              },
+              'postcss-loader',
+            ],
+          },
+          {
+            test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
+            type: 'asset',
+            parser: {
+              dataUrlCondition: {
+                maxSize: 8 * 1024,
               },
             },
           },
         ],
-      },
-      {
-        test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
-        type: 'asset',
       },
 
       // Add your rules for custom modules here

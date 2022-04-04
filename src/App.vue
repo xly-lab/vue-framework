@@ -14,20 +14,6 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-* {
-  padding: 0;
-  margin: 0;
-  #app {
-    padding: 0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    .container-box {
-      width: 400px;
-      height: 300px;
-    }
-  }
-}
+<style lang="sass" scoped>
+@import './app.scss'
 </style>
