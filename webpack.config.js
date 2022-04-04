@@ -69,7 +69,19 @@ const config = {
       },
       {
         test: /\.s[ac]ss$/i,
-        use: [stylesHandler, 'css-loader', 'sass-loader'],
+        use: [
+          stylesHandler,
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              implementation: require('sass'),
+              sassOptions: {
+                indentedSyntax: true, // optional
+              },
+            },
+          },
+        ],
       },
       {
         test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
@@ -89,7 +101,7 @@ module.exports = () => {
     config.devtool = 'cheap-module-source-map';
     config.output = {
       path: path.resolve(__dirname, 'dist'),
-      filename: '[name].[contenthash].[ext]',
+      filename: '[name].[contenthash].js',
     };
     config.plugins.push(new WorkboxWebpackPlugin.GenerateSW());
   } else {

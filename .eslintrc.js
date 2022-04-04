@@ -20,6 +20,7 @@ module.exports = {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'vue/name-property-casing': ['error', 'PascalCase'],
+    'vue/comment-directive': 'off',
     'accessor-pairs': 2,
     'arrow-spacing': [
       2,
@@ -226,15 +227,7 @@ module.exports = {
       2,
       'always',
       {
-        markers: [
-          'global',
-          'globals',
-          'eslint',
-          'eslint-disable',
-          '*package',
-          '!',
-          ',',
-        ],
+        markers: ['global', 'globals', 'eslint', 'eslint-disable', '*package', '!', ','],
       },
     ],
     'template-curly-spacing': [2, 'never'],

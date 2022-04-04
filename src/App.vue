@@ -1,5 +1,9 @@
 <template>
-  <div id="app">配置 vue 架构 支持eslint检测</div>
+  <div id="app">
+    <div class="container-box">
+      <v-parallax src="https://cdn.vuetifyjs.com/images/parallax/material.jpg" height="300"></v-parallax>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -10,14 +14,20 @@ export default {
 };
 </script>
 
-<style lang='scss'>
+<style lang="scss" scoped>
 * {
   padding: 0;
   margin: 0;
   #app {
     padding: 0;
-    background-color: rgb(255, 255, 0);
-    color: rgb(255, 76, 76);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .container-box {
+      width: 400px;
+      height: 300px;
+    }
   }
 }
 </style>

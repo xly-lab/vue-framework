@@ -3,29 +3,22 @@
   <head>
     <meta charset="utf-8" />
     <title>Webpack App</title>
-    <script src="https://cesium.com/downloads/cesiumjs/releases/1.92/Build/Cesium/Cesium.js"></script>
-    <link
-      href="https://cesium.com/downloads/cesiumjs/releases/1.92/Build/Cesium/Widgets/widgets.css"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet" />
   </head>
   <body>
     <div id="root"></div>
   </body>
-
   <script>
-    if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => {
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
         navigator.serviceWorker
-          .register("service-worker.js")
+          .register('service-worker.js')
           .then((registration) => {
-            console.log("Service Worker registered: ", registration);
+            console.log('Service Worker registered: ', registration);
           })
           .catch((registrationError) => {
-            console.error(
-              "Service Worker registration failed: ",
-              registrationError
-            );
+            console.error('Service Worker registration failed: ', registrationError);
           });
       });
     }
