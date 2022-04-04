@@ -25,7 +25,7 @@ const config = {
       overlay: {
         // 有报错发生，直接覆盖浏览器视窗，显示错误
         errors: true,
-        warnings: false,
+        warnings: true,
       },
     },
   },
@@ -55,12 +55,12 @@ const config = {
   module: {
     rules: [
       {
+        test: /.vue$/,
+        loader: 'vue-loader',
+        exclude: '/node_modules/',
+      },
+      {
         oneOf: [
-          {
-            test: /.vue$/,
-            loader: 'vue-loader',
-            exclude: '/node_modules/',
-          },
           {
             test: /\.(js|jsx)$/i,
             loader: 'babel-loader',
