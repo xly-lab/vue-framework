@@ -1,6 +1,6 @@
 {
   "name": "my-webpack-project",
-  "version": "1.0.0-bate.0",
+  "version": "1.0.0-beta.0",
   "description": "My webpack project",
   "main": "index.js",
   "scripts": {
