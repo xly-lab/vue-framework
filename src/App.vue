@@ -20,15 +20,20 @@
         </v-toolbar>
         <v-divider></v-divider>
         <v-card-text style="height: 200px"></v-card-text>
+        <maina />
       </v-card>
     </v-card>
   </div>
 </template>
 
 <script>
+import maina from './views/main';
 export default {
   name: 'App',
 
+  components: {
+    maina,
+  },
   mounted() {},
 };
 </script>

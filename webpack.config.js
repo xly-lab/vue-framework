@@ -1,15 +1,20 @@
 // Generated using webpack-cli https://github.com/webpack/webpack-cli
 
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
 const FriendLyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const ESLintWebpackPlugin = require('eslint-webpack-plugin');
+const dotenv = require('dotenv');
+const dotenvExpand = require('dotenv-expand');
 
 const isProduction = process.env.NODE_ENV === 'production';
 const stylesHandler = MiniCssExtractPlugin.loader;
+
+dotenvExpand.expand(dotenv.config());
 
 const config = {
   entry: './src/index.js',
@@ -29,6 +34,15 @@ const config = {
         warnings: true,
       },
     },
+    proxy: {
+      '/api': {
+        target: 'https://zhuanlan.zhihu.com/api/columns', // 目标接口域名
+        changeOrigin: true, // 是否跨域
+        pathRewrite: {
+          '^/api': '/', // 重写接口
+        },
+      },
+    },
   },
   stats: 'errors-warnings',
   resolve: {
@@ -44,12 +58,31 @@ const config = {
     }),
     // @ts-ignore
     new ESLintWebpackPlugin({
-      extensions: ['js'],
       context: path.resolve('src'),
-      exclude: '/node_modules',
+      exclude: 'node_modules',
+      extensions: ['js', 'json', 'vue'],
     }),
     new MiniCssExtractPlugin(),
     new FriendLyErrorsWebpackPlugin({}),
+
+    new webpack.ProgressPlugin({
+      activeModules: false,
+      entries: true,
+      modules: true,
+      modulesCount: 5000,
+      profile: false,
+      dependencies: true,
+      dependenciesCount: 10000,
+      percentBy: 'entries',
+    }),
+    new webpack.DefinePlugin({
+      // webpack自带该插件，无需单独安装
+      'process.env': {
+        VUE_APP_PACKAGE_NAME: JSON.stringify(process.env.VUE_APP_PACKAGE_NAME), // 将属性转化为全局变量，让代码中可以正常访问
+        VUE_APP_PACKAGE_VERSION: JSON.stringify(process.env.VUE_APP_PACKAGE_VERSION), // 将属性转化为全局变量，让代码中可以正常访问
+        VUE_APP_PACKAGE_DESCRIPTION: JSON.stringify(process.env.VUE_APP_PACKAGE_DESCRIPTION), // 将属性转化为全局变量，让代码中可以正常访问
+      },
+    }),
     // Add your plugins here
     // Learn more about plugins from https://webpack.js.org/configuration/plugins/
   ],

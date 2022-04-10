@@ -17,8 +17,8 @@ module.exports = {
     quotes: ['error', 'single'],
     semi: ['error', 'always'],
     'no-undef': 0,
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'no-console': 'off',
+    'no-debugger': 'off',
     'vue/name-property-casing': ['error', 'PascalCase'],
     'vue/comment-directive': 'off',
     'accessor-pairs': 2,
@@ -43,7 +43,7 @@ module.exports = {
         properties: 'always',
       },
     ],
-    'comma-dangle': [0, 'always'],
+    'comma-dangle': ['error', 'always-multiline'],
     'comma-spacing': [
       2,
       {

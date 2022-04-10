@@ -1,9 +1,13 @@
 // http.js
 import axios from 'axios';
+const baseURL = '/';
 
-axios.defaults.baseURL = '/';
+const http = axios.create({
+  baseURL,
+});
+
 // 请求拦截
-axios.interceptors.request.use(
+http.interceptors.request.use(
   (config) => {
     // do something
     return config;
@@ -13,7 +17,7 @@ axios.interceptors.request.use(
   },
 );
 // 返回拦截
-axios.interceptors.response.use(
+http.interceptors.response.use(
   (response) => {
     // do something
     return response;
@@ -22,17 +26,4 @@ axios.interceptors.response.use(
     return Promise.reject(error);
   },
 );
-
-export function get(url, params) {
-  return axios
-    .get(url, {
-      params,
-    })
-    .then((res) => {
-      // do something
-      return res.data;
-    })
-    .catch((e) => {
-      console.log(e);
-    });
-}
+export default http;
